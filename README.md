@@ -1,2 +1,11 @@
 # image-formats
-A test implementation of image converters / generators
+
+A test implementation of image converters / generators.
+
+## PNG Format
+
+Currently, the only image format under development is
+[PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) using the
+specification defined by [RFC2083](https://tools.ietf.org/html/rfc2083).
+
+It is unknown how this project will form.
