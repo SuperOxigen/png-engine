@@ -12,13 +12,19 @@
 
 #include "ihdr.h"
 
-static uint32_t const kSigned32Max = 0x7fffffffu;
-static uint32_t const kMaxWidth = kSigned32Max;
-static uint32_t const kMaxHeight = kSigned32Max;
+/*
+ * IHDR specific constants.  Defined in RFC2083 Section 4.1.1.
+ */
 
 static uint32_t const kIhdrType = IHDR_TYPE;
+
+/* Size of serialized IHDR byte size. */
 static uint32_t const kIhdrSize =
-    (sizeof(uint32_t) * 2) + (sizeof(uint8_t) * 5);
+ (sizeof(uint32_t) * 2) + (sizeof(uint8_t) * 5);
+
+/* Image height and width maximums */
+static uint32_t const kMaxWidth = kSigned32Max;
+static uint32_t const kMaxHeight = kSigned32Max;
 
 /* Color types bits */
 static uint8_t const kPaletteBitMask = 0x01;
@@ -43,6 +49,26 @@ static uint8_t const kAllowedRealcolorDepths[] = {8, 16};
 static uint8_t const kAllowedPaletteIndexDepths[] = {1, 2, 4, 8};
 static uint8_t const kAllowedGrayscaleAlphaDepths[] = {8, 16};
 static uint8_t const kAllowedRealcolorAlphaDepths[] = {8, 16};
+
+/* Valid compression methods. */
+static uint8_t const kDeflateInflateCompressionMethod = 0;
+static uint8_t const kValidCompressionMethods[] = {
+    kDeflateInflateCompressionMethod
+};
+
+/* Valid filter methods. */
+static uint8_t const kAdaptiveFiltering5 = 0;
+static uint8_t const kValidFilterMethods[] = {
+    kAdaptiveFiltering5
+};
+
+/* Valid interlace methods. */
+static uint8_t const kNoInterlace = 0;
+static uint8_t const kAdam7Interlace = 1;
+static uint8_t const kValidInterlaceMethods[] = {
+    kNoInterlace,
+    kAdam7Interlace
+};
 
 bool_t chunk_is_ihdr(chunk_t const *chunk)
 {
@@ -104,7 +130,24 @@ bool_t ihdr_is_valid(ihdr_t const *ihdr)
         return false;
     }
 
-    engine_die("ihdr_is_valid() is not implemented");
+    /* Validate compression method */
+    if (!CONTAINS(ihdr->compression_method, kValidCompressionMethods))
+    {
+        return false;
+    }
+
+    /* Validate filter method. */
+    if (!CONTAINS(ihdr->filter_method, kValidFilterMethods))
+    {
+        return false;
+    }
+
+    /* Validate filter method. */
+    if (!CONTAINS(ihdr->interlace_method, kValidInterlaceMethods))
+    {
+        return false;
+    }
+
     return true;
 }
 

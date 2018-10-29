@@ -26,4 +26,11 @@ typedef enum {
     STATUS_BAD_PACKET
 } status_t;
 
+/*
+ *  Global constants.
+ */
+
+/* For most of PNG u32 types have a maximum value of 2^31-1. */
+static uint32_t const kSigned32Max = 0x7fffffffu;
+
 #endif /* _BASE_H_ */

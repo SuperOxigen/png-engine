@@ -24,8 +24,11 @@ typedef struct {
     uint8_t bit_depth;
     /* Bit mask of color types. */
     uint8_t color_type;
+    /* Compression method used on image data. */
     uint8_t compression_method;
+    /* Filter method used on image data before compression. */
     uint8_t filter_method;
+    /* Interlace method for transmission order of image data. */
     uint8_t interlace_method;
 } ihdr_t;
 
@@ -136,5 +139,14 @@ bool_t ihdr_color_type_is_palette(uint8_t color_type);
 bool_t ihdr_color_type_is_realcolor(uint8_t color_type);
 bool_t ihdr_color_type_is_alpha_channel(uint8_t color_type);
 
+/* Compression methods */
+bool_t ihdr_compression_method_is_default(uint8_t compression_method);
+
+/* Filtering methods */
+bool_t ihdr_filter_method_is_adaptive(uint8_t filter_method);
+
+/* *Interlace methods. */
+bool_t ihdr_interlace_method_is_default(uint8_t interlace_method);
+bool_t ihdr_interlace_method_is_adam7(uint8_t interlace_method);
 
 #endif /* _IHDR_H_ */
