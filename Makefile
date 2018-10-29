@@ -24,7 +24,11 @@ obj/ihdr.o: src/ihdr.c src/ihdr.h $(BASE_INC)
 	@mkdir -p obj
 	$(CC) $(CFLAGS) -o obj/ihdr.o -c src/ihdr.c
 
-OBJS = obj/chunk.o obj/engine.o obj/ihdr.o
+obj/plte.o: src/plte.c src/plte.h $(BASE_INC)
+	@mkdir -p obj
+	$(CC) $(CFLAGS) -o obj/plte.o -c src/plte.c
+
+OBJS = obj/chunk.o obj/engine.o obj/ihdr.o obj/plte.o
 
 bin/img.exe: $(OBJS) src/main.c
 	@mkdir -p bin
