@@ -1,6 +1,6 @@
-# image-formats
+# png-engine
 
-A test implementation of image converters / generators.
+A test implementation of PNG image converter / generators.
 
 ## PNG Format
 
