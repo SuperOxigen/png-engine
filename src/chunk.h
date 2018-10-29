@@ -21,9 +21,11 @@ typedef struct {
 /*
  * Function: chunk_new
  *  Creates a new PNG chunk using provided parameters.
+ * Note:
+ *  This allocates a copy of `data` on the heap.
  * Args:
  *    type - Numeric chunk type
- *    data - Chunk data
+ *    data - Chunk data to be copied to chunk.
  *    length - Length of the data
  *    chunk - Pointer to an uninitialized chunk
  * Return:
@@ -31,6 +33,21 @@ typedef struct {
  */
 status_t chunk_new(
     uint32_t type, uint8_t const *data, uint32_t length, chunk_t *chunk);
+
+/*
+ * Function: chunk_create
+ *  Creates a new PNG chunk using provided parameters.
+ *  Does not allocate any memory on the stack.
+ * Args:
+ *    type - Numeric chunk type
+ *    data - Chunk data.
+ *    length - Length of the data
+ *    chunk - Pointer to an uninitialized chunk
+ * Return:
+ *    OK on successful creation.
+ */
+status_t chunk_create(
+    uint32_t type, uint8_t *data, uint32_t length, chunk_t *chunk);
 
 /*
  * Function: chunk_serialize
@@ -97,7 +114,7 @@ status_t chunk_clear(chunk_t *chunk);
  *    OK on successful reset.  NULL_ARG if any of the input
  *    variables are null.
  */
-status_t chunk_reset(chunk_t *chunk);
+status_t chunk_free(chunk_t *chunk);
 
 /*
  * Function: chunk_swap

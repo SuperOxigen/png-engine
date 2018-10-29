@@ -9,16 +9,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "engine.h"
+
 #include "chunk.h"
 
 static size_t const kChunkTypeSize = sizeof(uint32_t);
 
-static uint32_t const kMaxLength = 0x7fffffffu;
+static uint32_t const kMaxLength = kSigned32Max;
 static uint32_t const kU32Mask = 0xffffffffu;
-
-static uint32_t const kOneMegabyte = 1048576;
-/* Limit on chunk data size. */
-static uint32_t const kDataSizeLimit = 4*kOneMegabyte;
 
 static uint32_t const kCrcPolynomial = 0xedb88320u;
 
@@ -30,6 +28,8 @@ static uint32_t const kSafeToCopyBitMask = 0x00000020u;
 
 status_t chunk_new(uint32_t type, uint8_t const *data, uint32_t length, chunk_t *chunk)
 {
+    status_t status;
+    uint8_t *chunk_data;
     if (!chunk || (!data && length != 0))
     {
         return STATUS_NULL_ARGUMENT;
@@ -38,21 +38,42 @@ status_t chunk_new(uint32_t type, uint8_t const *data, uint32_t length, chunk_t 
     {
         return STATUS_ILLEGAL_ARGUMENT;
     }
-    if (length > kDataSizeLimit)
-    {
-        return STATUS_OUT_OF_MEMORY;
-    }
-    chunk->length = length;
-    chunk->type = type;
+
     if (length == 0)
     {
-        chunk->data = NULL;
+        chunk_data = NULL;
     }
     else
     {
-        chunk->data = (uint8_t*)malloc(length);
-        memcpy(chunk->data, data, length);
+        chunk_data = (uint8_t *)engine_allocate(length);
+        if (!chunk_data)
+        {
+            return STATUS_OUT_OF_MEMORY;
+        }
+        memcpy(chunk_data, data, length);
     }
+    status = chunk_create(type, chunk_data, length, chunk);
+    if (status != STATUS_OK && chunk_data)
+    {
+        free(chunk_data);
+    }
+    return status;
+}
+
+status_t chunk_create(uint32_t type, uint8_t *data, uint32_t length, chunk_t *chunk)
+{
+    if (!chunk || (!data && length != 0))
+    {
+        return STATUS_NULL_ARGUMENT;
+    }
+
+    if (length > kMaxLength || !chunk_type_is_valid(type))
+    {
+        return STATUS_ILLEGAL_ARGUMENT;
+    }
+    chunk->type = type;
+    chunk->length = length;
+    chunk->data = data;
     return STATUS_OK;
 }
 
@@ -155,11 +176,7 @@ status_t chunk_deserialize(uint8_t const *inbuf, size_t *inlen, chunk_t *chunk)
 
     /* Data */
     /* Check that the data file is within allocation limit. */
-    if (chunk->length > kDataSizeLimit)
-    {
-        return STATUS_OUT_OF_MEMORY;
-    }
-    chunk->data = (uint8_t *) malloc(chunk->length);
+    chunk->data = (uint8_t *)engine_allocate(chunk->length);
     if (!chunk->data)
     {
         return STATUS_OUT_OF_MEMORY;
@@ -251,7 +268,7 @@ status_t chunk_clear(chunk_t *chunk)
     return STATUS_OK;
 }
 
-status_t chunk_reset(chunk_t *chunk)
+status_t chunk_free(chunk_t *chunk)
 {
     if (!chunk)
     {
