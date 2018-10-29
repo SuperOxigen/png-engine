@@ -127,7 +127,7 @@ status_t ihdr_from_chunk(chunk_t const *chunk, ihdr_t *ihdr);
  * Args:
  *    ihdr - Pointer to an initialized IHDR struct.
  * Return:
- *    OK if IHDR was successfully deserialized from the chunk.
+ *    OK if sample depth was found.
  *    NULL_ARG if any of the arguments are NULL.
  *    ILLEGAL_ARG if the color type is unknown.
  */
