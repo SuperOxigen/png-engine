@@ -8,6 +8,10 @@
 #ifndef _ENGINE_H_
 #define _ENGINE_H_
 
+#include "base.h"
+
 void engine_die(char const * msg);
+
+void *engine_allocate(size_t bytes);
 
 #endif /* _ENGINE_H_ */
