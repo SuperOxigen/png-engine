@@ -178,7 +178,8 @@ status_t palette_from_chunk(chunk_t const *chunk, palette_t *palette);
  *    NULL_ARG if any of the arguments are NULL.
  *    FAILURE if the index is out of bounds.
  */
-status_t palette_get_color(palette_t const *palette, uint8_t index, rgb_t *color);
+status_t palette_get_color(
+    palette_t const *palette, uint8_t index, rgb_t *color);
 
 
 #endif /* _PLTE_H_ */

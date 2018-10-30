@@ -22,7 +22,8 @@ int32_t FORMAT_PRINTF(5, 6) loggerf(
     char const *format, ...);
 
 #ifdef _TRACE
-#define LOG_TRACE(...) loggerf(LOGGER_TRACE, __FILE__, __LINE__, __FUNC__, __VA_ARGS__)
+#define LOG_TRACE(...) \
+    loggerf(LOGGER_TRACE, __FILE__, __LINE__, __FUNC__, __VA_ARGS__)
 #define TRACE_ENTRY DTRACE("Entered: " __FUNC__)
 #define TRACE_EXIT DTRACE("Exit: " __FUNC__)
 #define TRACE_EXIT_LABEL(message) DTRACE("Exit: " __FUNC__ ": " message)
@@ -34,7 +35,8 @@ int32_t FORMAT_PRINTF(5, 6) loggerf(
 #endif /* no _TRACE */
 
 #ifdef _DEBUG
-#define LOG_DEBUG(...) loggerf(LOGGER_DEBUG, __FILE__, __LINE__, __FUNC__, __VA_ARGS__)
+#define LOG_DEBUG(...) \
+    loggerf(LOGGER_DEBUG, __FILE__, __LINE__, __FUNC__, __VA_ARGS__)
 #else /* if no _DEBUG */
 #define LOG_DEBUG(...)
 #endif /* no _DEBUG */

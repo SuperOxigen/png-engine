@@ -26,7 +26,8 @@ static uint32_t const kPrivateBitMask = 0x00200000u;
 static uint32_t const kReservedBitMask = 0x00002000u;
 static uint32_t const kSafeToCopyBitMask = 0x00000020u;
 
-status_t chunk_new(uint32_t type, uint8_t const *data, uint32_t length, chunk_t *chunk)
+status_t chunk_new(
+    uint32_t type, uint8_t const *data, uint32_t length, chunk_t *chunk)
 {
     status_t status;
     uint8_t *chunk_data;
@@ -60,7 +61,8 @@ status_t chunk_new(uint32_t type, uint8_t const *data, uint32_t length, chunk_t 
     return status;
 }
 
-status_t chunk_create(uint32_t type, uint8_t *data, uint32_t length, chunk_t *chunk)
+status_t chunk_create(
+    uint32_t type, uint8_t *data, uint32_t length, chunk_t *chunk)
 {
     if (!chunk || (!data && length != 0))
     {

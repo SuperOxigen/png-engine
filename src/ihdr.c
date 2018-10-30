@@ -40,8 +40,12 @@ static uint8_t const kGrayscaleAlphaColorType = kAlphaChannelBitMask;
 static uint8_t const kRealcolorAlphaColorType =
     kRealcolorBitMask | kAlphaChannelBitMask;
 static uint8_t const kValidColorTypes[] = {
-    kGrayscaleColorType, kRealcolorColorType, kPaletteIndexColorType,
-    kGrayscaleAlphaColorType, kRealcolorAlphaColorType};
+    kGrayscaleColorType,
+    kRealcolorColorType,
+    kPaletteIndexColorType,
+    kGrayscaleAlphaColorType,
+    kRealcolorAlphaColorType
+};
 
 /* Bit Depth for Color Types */
 static uint8_t const kAllowedGrayscaleDepths[] = {1, 2, 4, 8, 16};
@@ -75,7 +79,8 @@ bool_t chunk_is_ihdr(chunk_t const *chunk)
     return (chunk && chunk->type == kIhdrType && chunk->length == kIhdrSize);
 }
 
-static bool_t contains_value(uint8_t value, uint8_t const *values, uint32_t length)
+static bool_t contains_value(
+    uint8_t value, uint8_t const *values, uint32_t length)
 {
     uint32_t i;
     for (i = 0; i < length; i++)
@@ -107,23 +112,28 @@ bool_t ihdr_is_valid(ihdr_t const *ihdr)
     /* Validate code type and bit depth. */
     if (ihdr->color_type == kGrayscaleColorType)
     {
-        if (!CONTAINS(ihdr->bit_depth, kAllowedGrayscaleDepths)) return false;
+        if (!CONTAINS(ihdr->bit_depth, kAllowedGrayscaleDepths))
+            return false;
     }
     else if (ihdr->color_type == kRealcolorColorType)
     {
-        if (!CONTAINS(ihdr->bit_depth, kAllowedRealcolorDepths)) return false;
+        if (!CONTAINS(ihdr->bit_depth, kAllowedRealcolorDepths))
+            return false;
     }
     else if (ihdr->color_type == kPaletteIndexColorType)
     {
-        if (!CONTAINS(ihdr->bit_depth, kAllowedPaletteIndexDepths)) return false;
+        if (!CONTAINS(ihdr->bit_depth, kAllowedPaletteIndexDepths))
+            return false;
     }
     else if (ihdr->color_type == kGrayscaleAlphaColorType)
     {
-        if (!CONTAINS(ihdr->bit_depth, kAllowedGrayscaleAlphaDepths)) return false;
+        if (!CONTAINS(ihdr->bit_depth, kAllowedGrayscaleAlphaDepths))
+            return false;
     }
     else if (ihdr->color_type == kRealcolorAlphaColorType)
     {
-        if (!CONTAINS(ihdr->bit_depth, kAllowedRealcolorAlphaDepths)) return false;
+        if (!CONTAINS(ihdr->bit_depth, kAllowedRealcolorAlphaDepths))
+            return false;
     }
     else
     {

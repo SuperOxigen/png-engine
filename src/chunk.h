@@ -58,13 +58,15 @@ status_t chunk_create(
  * Args:
  *    chunk - Source data for serialization
  *    outbuf - Destination buffer for serialized chunk data
- *    outlen - As input, it represents the size of `outbuf`.  As output,
- *             the value is the total number of bytes that were written.
+ *    outlen - As input, it represents the size of `outbuf`.  As
+ *             output, the value is the total number of bytes that
+ *             were written.
  *  Return:
  *    OK on successful serialization.  NULL_ARG if any of the input
  *    variables are null.
  */
-status_t chunk_serialize(chunk_t const *chunk, uint8_t *outbuf, size_t *outlen);
+status_t chunk_serialize(
+    chunk_t const *chunk, uint8_t *outbuf, size_t *outlen);
 
 /*
  * Function: chunk_deserialize
@@ -79,7 +81,8 @@ status_t chunk_serialize(chunk_t const *chunk, uint8_t *outbuf, size_t *outlen);
  *    OK on successful deserialization.  NULL_ARG if any of the input
  *    variables are null.
  */
-status_t chunk_deserialize(uint8_t const *inbuf, size_t *inlen, chunk_t *chunk);
+status_t chunk_deserialize(
+    uint8_t const *inbuf, size_t *inlen, chunk_t *chunk);
 
 /*
  * Function: chunk_calculate_crc
@@ -95,8 +98,8 @@ status_t chunk_calculate_crc(chunk_t const *chunk, uint32_t *crc);
 
 /*
  * Function: chunk_clear
- *  Zeros the provided chunk.  Intended to be used on a stack allocated
- *  chunk struct.
+ *  Zeros the provided chunk.  Intended to be used on a stack
+ *  allocated chunk struct.
  * Args:
  *    chunk - Chunk to be cleared.
  * Return:

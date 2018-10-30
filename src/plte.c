@@ -118,7 +118,8 @@ status_t palette_clear(palette_t *palette)
     return STATUS_OK;
 }
 
-status_t palette_serialize(palette_t const *palette, uint8_t *outbuf, uint32_t *outlen)
+status_t palette_serialize(
+    palette_t const *palette, uint8_t *outbuf, uint32_t *outlen)
 {
     uint32_t palette_byte_size;
     uint32_t i;
@@ -161,7 +162,8 @@ status_t palette_serialize(palette_t const *palette, uint8_t *outbuf, uint32_t *
     return STATUS_OK;
 }
 
-status_t palette_deserialize(uint8_t const *inbuf, uint32_t *inlen, palette_t *palette)
+status_t palette_deserialize(
+    uint8_t const *inbuf, uint32_t *inlen, palette_t *palette)
 {
     uint32_t i;
     index_t idx;
@@ -261,7 +263,8 @@ status_t palette_from_chunk(chunk_t const *chunk, palette_t *palette)
     return palette_deserialize(chunk->data, &palette_length, palette);
 }
 
-status_t palette_get_color(palette_t const *palette, uint8_t index, rgb_t *color)
+status_t palette_get_color(
+    palette_t const *palette, uint8_t index, rgb_t *color)
 {
     rgb_t const *palette_color;
     if (!palette || !color)

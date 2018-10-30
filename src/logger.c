@@ -29,12 +29,16 @@ static char const *level_to_string(int32_t level)
     }
 }
 
-int32_t loggerf(int32_t level, char const *filename, int32_t lineno, char const *funcname, char const *format, ...)
+int32_t loggerf(
+    int32_t level, char const *filename, int32_t lineno, char const *funcname,
+    char const *format, ...)
 {
     int32_t total, ret;
     va_list args;
 
-    total = fprintf(stderr, "[%5s] %s:%d (%s) ", level_to_string(level), filename, lineno, funcname);
+    total = fprintf(
+        stderr, "[%5s] %s:%d (%s) ",
+        level_to_string(level), filename, lineno, funcname);
     if (total < 0)
     {
         return total;

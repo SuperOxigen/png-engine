@@ -18,7 +18,8 @@
 
 #define __FUNC__ __FUNCTION__
 
-#define FORMAT_PRINTF(fmtidx, varidx) __attribute__((format (printf, fmtidx, varidx)))
+#define FORMAT_PRINTF(fmtidx, varidx) \
+    __attribute__((format (printf, fmtidx, varidx)))
 
 #else /* if no DEBUG */
 
