@@ -1,0 +1,6 @@
+# Indentation normalization
+src/*       text=auto
+LICENSE     text=auto
+Makefile    text=auto
+*.md        text=auto
+*.h         linguist-language=c
