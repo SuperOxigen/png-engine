@@ -74,9 +74,33 @@ static uint8_t const kValidInterlaceMethods[] = {
     kAdam7Interlace
 };
 
+/*
+ * IDAT specific constants.  Defined in RFC2083 Section 4.1.3.
+ */
+
+static uint32_t const kIdatType = IDAT_TYPE;
+
+/*
+ * IDAT specific constants.  Defined in RFC2083 Section 4.1.4.
+ */
+
+static uint32_t const kIendType = IEND_TYPE;
+static uint32_t const kIendSize = 0;  /* IEND chunks must be empty. */
+
+
 bool_t chunk_is_ihdr(chunk_t const *chunk)
 {
     return (chunk && chunk->type == kIhdrType && chunk->length == kIhdrSize);
+}
+
+bool_t chunk_is_idat(chunk_t const *chunk)
+{
+    return (chunk && chunk->type == kIdatType);
+}
+
+bool_t chunk_is_iend(chunk_t const *chunk)
+{
+    return (chunk && chunk->type == kIendType && chunk->length == kIendSize);
 }
 
 static bool_t contains_value(

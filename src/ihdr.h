@@ -11,7 +11,49 @@
 #include "chunk.h"
 
 /* Numeric value of "IHDR" in ASCII. */
-#define IHDR_TYPE  0x49484452
+#define IHDR_TYPE 0x49484452u
+/* Numeric value of "IDAT" in ASCII. */
+#define IDAT_TYPE 0x49444154u
+/* Numeric value of "IEND" in ASCII. */
+#define IEND_TYPE 0x49454e44u
+
+/*
+ * Function: chunk_is_ihdr
+ *  Determines if the provide chunk is of type Image Header.  Does not
+ *  determine if the contained IHDR is valid.
+ * Args:
+ *    chunk - Pointer to chunk.
+ * Return:
+ *    `true` if the chunk is type is IHDR and the length of the chunk
+ *    data is large enough to fit all of the IHDR fields.
+ */
+bool_t chunk_is_ihdr(chunk_t const *chunk);
+
+/*
+ * Function: chunk_is_idat
+ *  Determines if the provide chunk is of type Image Data.  Does not
+ *  determine if the contained IDAT is valid.
+ * Args:
+ *    chunk - Pointer to chunk.
+ * Return:
+ *    `true` if the chunk is type is IDAT.
+ */
+bool_t chunk_is_idat(chunk_t const *chunk);
+
+/*
+ * Function: chunk_is_iend
+ *  Determines if the provide chunk is of type Image End.
+ * Args:
+ *    chunk - Pointer to chunk.
+ * Return:
+ *    `true` if the chunk is type is IEND and there is no data in the
+ *           chunk data field.
+ */
+bool_t chunk_is_iend(chunk_t const *chunk);
+
+/*
+ *  IHDR API.
+ */
 
 typedef struct {
     /*
@@ -31,18 +73,6 @@ typedef struct {
     /* Interlace method for transmission order of image data. */
     uint8_t interlace_method;
 } ihdr_t;
-
-/*
- * Function: chunk_is_ihdr
- *  Determines if the provide chunk is of type Image Header.  Does not
- *  determine if the contained IHDR is valid.
- * Args:
- *    chunk - Pointer to chunk.
- * Return:
- *    `true` if the chunk is type is IHDR and the length of the chunk
- *    data is large enough to fit all of the IHDR fields.
- */
-bool_t chunk_is_ihdr(chunk_t const *chunk);
 
 /*
  * Function: ihdr_is_valid
