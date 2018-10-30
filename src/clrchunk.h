@@ -1,11 +1,11 @@
 /*
- *  Image-Formats - PNG PLTE Chunk
+ *  Image-Formats - PNG Color Chunks
  *
  *  Copyright (c) 2018 Alex Dale
  *  See LICENSE for details
  */
-#ifndef _PLTE_H_
-#define _PLTE_H_
+#ifndef _IMGCHUNK_H_
+#define _IMGCHUNK_H_
 
 #include "base.h"
 #include "chunk.h"
@@ -182,4 +182,4 @@ status_t palette_get_color(
     palette_t const *palette, uint8_t index, rgb_t *color);
 
 
-#endif /* _PLTE_H_ */
+#endif /* _IMGCHUNK_H_ */

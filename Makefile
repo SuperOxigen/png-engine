@@ -34,17 +34,17 @@ obj/chunk.o: src/chunk.c src/chunk.h $(BASE_INC)
 	@echo "[ CC ] src/chunk.c -> obj/chunk.o"
 	@$(CC) $(CFLAGS) -o obj/chunk.o -c src/chunk.c
 
-obj/ihdr.o: src/ihdr.c src/ihdr.h $(BASE_INC)
+obj/imgchunk.o: src/imgchunk.c src/imgchunk.h $(BASE_INC)
 	@mkdir -p obj
-	@echo "[ CC ] src/ihdr.c -> obj/ihdr.o"
-	@$(CC) $(CFLAGS) -o obj/ihdr.o -c src/ihdr.c
+	@echo "[ CC ] src/imgchunk.c -> obj/imgchunk.o"
+	@$(CC) $(CFLAGS) -o obj/imgchunk.o -c src/imgchunk.c
 
-obj/plte.o: src/plte.c src/plte.h $(BASE_INC)
+obj/clrchunk.o: src/clrchunk.c src/clrchunk.h $(BASE_INC)
 	@mkdir -p obj
-	@echo "[ CC ] src/plte.c -> obj/plte.o"
-	@$(CC) $(CFLAGS) -o obj/plte.o -c src/plte.c
+	@echo "[ CC ] src/clrchunk.c -> obj/clrchunk.o"
+	@$(CC) $(CFLAGS) -o obj/clrchunk.o -c src/clrchunk.c
 
-OBJS = obj/chunk.o obj/engine.o obj/ihdr.o obj/plte.o obj/logger.o
+OBJS = obj/chunk.o obj/engine.o obj/imgchunk.o obj/clrchunk.o obj/logger.o
 
 bin/img.exe: $(OBJS) src/main.c
 	@mkdir -p bin

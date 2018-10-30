@@ -1,5 +1,5 @@
 /*
- *  Image-Formats - PNG PLTE Chunk
+ *  Image-Formats - PNG Color Chunks
  *
  *  Copyright (c) 2018 Alex Dale
  *  See LICENSE for details
@@ -10,7 +10,7 @@
 #include <string.h>
 
 #include "engine.h"
-#include "plte.h"
+#include "clrchunk.h"
 
 /*
  * PLTE specific constants.  Defined in RFC2083 Section 4.1.2.
@@ -22,7 +22,7 @@ static uint32_t const kPlteType = PLTE_TYPE;
  * Serialized PLTE data must be byte alligned by 3
  * (red-blue-green 8-bits/each).
  */
-static uint32_t const kByteAlignment = 3;
+static uint32_t const kPaletteByteAlignment = 3;
 static uint32_t const kMaxPaletteColors = 255;
 
 /* Color byte offset */
@@ -142,7 +142,7 @@ status_t palette_serialize(
         return STATUS_ILLEGAL_ARGUMENT;
     }
 
-    palette_byte_size = palette->size * kByteAlignment;
+    palette_byte_size = palette->size * kPaletteByteAlignment;
 
     if (*outlen < palette_byte_size)
     {
@@ -153,7 +153,7 @@ status_t palette_serialize(
 
     for (i = 0; i < palette->size; i++)
     {
-        idx = i * kByteAlignment;
+        idx = i * kPaletteByteAlignment;
         outbuf[idx + kRedIndex] = palette->colors[i].red;
         outbuf[idx + kGreenIndex] = palette->colors[i].green;
         outbuf[idx + kBlueIndex] = palette->colors[i].blue;
@@ -195,7 +195,7 @@ status_t palette_deserialize(
 
     for (i = 0; i < palette->size; i++)
     {
-        idx = i * kByteAlignment;
+        idx = i * kPaletteByteAlignment;
         palette->colors[i].red = inbuf[idx + kRedIndex];
         palette->colors[i].green = inbuf[idx + kGreenIndex];
         palette->colors[i].blue = inbuf[idx + kBlueIndex];
@@ -220,7 +220,7 @@ status_t chunk_new_palette(palette_t const *palette, chunk_t *chunk)
         return STATUS_ILLEGAL_ARGUMENT;
     }
 
-    palette_length = palette->size * kByteAlignment;
+    palette_length = palette->size * kPaletteByteAlignment;
     palette_data = (uint8_t *)engine_allocate(palette_length);
     if (!palette_data)
     {
