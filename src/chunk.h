@@ -106,7 +106,7 @@ status_t chunk_calculate_crc(chunk_t const *chunk, uint32_t *crc);
 status_t chunk_clear(chunk_t *chunk);
 
 /*
- * Function: chunk_clear
+ * Function: chunk_free
  *  Frees the resouces of an initialized chunk and clears it.
  * Args:
  *    chunk - Chunk to be cleared.
