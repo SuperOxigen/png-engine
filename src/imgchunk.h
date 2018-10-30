@@ -1,11 +1,11 @@
 /*
- *  Image-Formats - PNG IHDR Chunk
+ *  Image-Formats - PNG Image Chunks
  *
  *  Copyright (c) 2018 Alex Dale
  *  See LICENSE for details
  */
-#ifndef _IHDR_H_
-#define _IHDR_H_
+#ifndef _IMGCHUNK_H_
+#define _IMGCHUNK_H_
 
 #include "base.h"
 #include "chunk.h"
@@ -179,4 +179,4 @@ bool_t ihdr_filter_method_is_adaptive(uint8_t filter_method);
 bool_t ihdr_interlace_method_is_default(uint8_t interlace_method);
 bool_t ihdr_interlace_method_is_adam7(uint8_t interlace_method);
 
-#endif /* _IHDR_H_ */
+#endif /* _IMGCHUNK_H_ */

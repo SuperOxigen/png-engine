@@ -1,5 +1,5 @@
 /*
- *  Image-Formats - PNG IHDR Chunk
+ *  Image-Formats - PNG Image Chunks
  *
  *  Copyright (c) 2018 Alex Dale
  *  See LICENSE for details
@@ -10,7 +10,7 @@
 
 #include "engine.h"
 
-#include "ihdr.h"
+#include "imgchunk.h"
 
 /*
  * IHDR specific constants.  Defined in RFC2083 Section 4.1.1.
