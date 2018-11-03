@@ -314,16 +314,16 @@ status_t chunk_swap(chunk_t *chunk_a, chunk_t *chunk_b)
     return STATUS_OK;
 }
 
-bool_t chunk_type_to_string(uint32_t type, char *out, size_t outlen)
+bool_t chunk_type_to_string(uint32_t type, char_t *out, size_t outlen)
 {
     uint32_t ntype;
-    char const *ntptr;
+    char_t const *ntptr;
 
     if (!out || outlen <= kChunkTypeSize || !chunk_type_is_valid(type))
         return false;
 
     ntype = htonl(type);
-    ntptr = (char *) &ntype;
+    ntptr = (char_t *) &ntype;
     memcpy(out, ntptr, kChunkTypeSize);
     memset(&out[kChunkTypeSize], 0, outlen - kChunkTypeSize);
 

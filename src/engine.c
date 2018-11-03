@@ -9,7 +9,7 @@
 
 #include "engine.h"
 
-void engine_die(char const *msg)
+void engine_die(char_t const *msg)
 {
     fprintf(stderr, "%s\n", msg ? msg : "Dead");
     exit(EXIT_FAILURE);

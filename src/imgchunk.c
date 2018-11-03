@@ -147,7 +147,7 @@ uint8_t color_type_to_code(color_type_t color_type)
     }
 }
 
-char const *color_type_string(color_type_t color_type)
+char_t const *color_type_string(color_type_t color_type)
 {
     switch (color_type)
     {

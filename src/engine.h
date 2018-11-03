@@ -10,7 +10,7 @@
 
 #include "base.h"
 
-void engine_die(char const * msg);
+void engine_die(char_t const * msg);
 
 void *engine_allocate(size_t bytes);
 

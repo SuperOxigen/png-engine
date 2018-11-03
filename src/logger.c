@@ -10,7 +10,7 @@
 
 #include "logger.h"
 
-static char const *level_to_string(int32_t level)
+static char_t const *level_to_string(int32_t level)
 {
     switch (level)
     {
@@ -30,8 +30,8 @@ static char const *level_to_string(int32_t level)
 }
 
 int32_t loggerf(
-    int32_t level, char const *filename, int32_t lineno, char const *funcname,
-    char const *format, ...)
+    int32_t level, char_t const *filename, int32_t lineno, char_t const *funcname,
+    char_t const *format, ...)
 {
     int32_t total, ret;
     va_list args;

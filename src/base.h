@@ -29,6 +29,8 @@ typedef enum {
 
 typedef size_t index_t;
 
+typedef char char_t;
+
 /*
  *  Global constants.
  */

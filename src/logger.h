@@ -18,8 +18,8 @@
 #define LOGGER_ERROR 4
 
 int32_t FORMAT_PRINTF(5, 6) loggerf(
-    int32_t level, char const *filename, int32_t lineno, char const *funcname,
-    char const *format, ...);
+    int32_t level, char_t const *filename, int32_t lineno, char_t const *funcname,
+    char_t const *format, ...);
 
 #ifdef _TRACE
 #define LOG_TRACE(...) \

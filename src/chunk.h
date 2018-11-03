@@ -130,7 +130,7 @@ status_t chunk_swap(chunk_t *chunk_a, chunk_t *chunk_b);
  *  Turns a valid chunk type into its string representation.
  *  Provided string buffer must be at least 5 bytes long.
  */
-bool_t chunk_type_to_string(uint32_t type, char *out, size_t outlen);
+bool_t chunk_type_to_string(uint32_t type, char_t *out, size_t outlen);
 
 bool_t chunk_type_is_valid(uint32_t type);
 bool_t chunk_type_is_critical(uint32_t type);
