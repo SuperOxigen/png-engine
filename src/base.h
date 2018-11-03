@@ -31,6 +31,8 @@ typedef size_t index_t;
 
 typedef char char_t;
 
+char_t const *status_string(status_t status);
+
 /*
  *  Global constants.
  */

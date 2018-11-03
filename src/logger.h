@@ -27,11 +27,15 @@ int32_t FORMAT_PRINTF(5, 6) loggerf(
 #define TRACE_ENTRY DTRACE("Entered: " __FUNC__)
 #define TRACE_EXIT DTRACE("Exit: " __FUNC__)
 #define TRACE_EXIT_LABEL(message) DTRACE("Exit: " __FUNC__ ": " message)
+#define TRACE_RETURN(status) \
+    { LOG_TRACE("Return: %s" status_string(status)); return status; }
+
 #else /* if no _TRACE */
 #define LOG_TRACE(...)
 #define TRACE_ENTRY
 #define TRACE_EXIT
 #define TRACE_EXIT_LABEL(message)
+#define TRACE_RETURN(status) return status;
 #endif /* no _TRACE */
 
 #ifdef _DEBUG
@@ -40,5 +44,6 @@ int32_t FORMAT_PRINTF(5, 6) loggerf(
 #else /* if no _DEBUG */
 #define LOG_DEBUG(...)
 #endif /* no _DEBUG */
+
 
 #endif /* _LOGGING_H_ */
