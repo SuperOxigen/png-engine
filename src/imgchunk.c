@@ -103,6 +103,70 @@ bool_t chunk_is_iend(chunk_t const *chunk)
     return (chunk && chunk->type == kIendType && chunk->length == kIendSize);
 }
 
+color_type_t color_type_from_code(uint8_t color_type_code)
+{
+    if (color_type_code == kGrayscaleColorType)
+    {
+        return COLOR_TYPE_GRAYSCALE;
+    }
+    if (color_type_code == kRealcolorColorType)
+    {
+        return COLOR_TYPE_REALCOLOR;
+    }
+    if (color_type_code == kPaletteIndexColorType)
+    {
+        return COLOR_TYPE_PALETTE;
+    }
+    if (color_type_code == kGrayscaleAlphaColorType)
+    {
+        return COLOR_TYPE_GRAYSCALE_ALPHA;
+    }
+    if (color_type_code == kRealcolorAlphaColorType)
+    {
+        return COLOR_TYPE_REALCOLOR_ALPHA;
+    }
+    return COLOR_TYPE_UNKNOWN;
+}
+
+uint8_t color_type_to_code(color_type_t color_type)
+{
+    switch (color_type)
+    {
+        case COLOR_TYPE_GRAYSCALE:
+            return kGrayscaleColorType;
+        case COLOR_TYPE_REALCOLOR:
+            return kRealcolorColorType;
+        case COLOR_TYPE_PALETTE:
+            return kPaletteIndexColorType;
+        case COLOR_TYPE_GRAYSCALE_ALPHA:
+            return kGrayscaleAlphaColorType;
+        case COLOR_TYPE_REALCOLOR_ALPHA:
+            return kRealcolorAlphaColorType;
+        default:
+            return 0xff;
+    }
+}
+
+char const *color_type_string(color_type_t color_type)
+{
+    switch (color_type)
+    {
+        case COLOR_TYPE_GRAYSCALE:
+            return "Grayscale";
+        case COLOR_TYPE_REALCOLOR:
+            return "Realcolor";
+        case COLOR_TYPE_PALETTE:
+            return "Palette";
+        case COLOR_TYPE_GRAYSCALE_ALPHA:
+            return "Grayscale w/ Alpha";
+        case COLOR_TYPE_REALCOLOR_ALPHA:
+            return "Realcolor w/ Alpha";
+        default:
+            return "Unknown";
+    }
+}
+
+
 static bool_t contains_value(
     uint8_t value, uint8_t const *values, uint32_t length)
 {

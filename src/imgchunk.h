@@ -52,6 +52,25 @@ bool_t chunk_is_idat(chunk_t const *chunk);
 bool_t chunk_is_iend(chunk_t const *chunk);
 
 /*
+ *  Supported color types.
+ */
+
+typedef enum {
+    COLOR_TYPE_GRAYSCALE,
+    COLOR_TYPE_REALCOLOR,
+    COLOR_TYPE_PALETTE,
+    COLOR_TYPE_GRAYSCALE_ALPHA,
+    COLOR_TYPE_REALCOLOR_ALPHA,
+    /* Larger than posible color type codes. */
+    COLOR_TYPE_UNKNOWN = 256
+} color_type_t;
+
+/* Color type enumeration. */
+color_type_t color_type_from_code(uint8_t color_type_code);
+uint8_t color_type_to_code(color_type_t color_type);
+char const *color_type_string(color_type_t color_type);
+
+/*
  *  IHDR API.
  */
 
